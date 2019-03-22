@@ -28,8 +28,8 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const newAction = req.body;
-    await db.insert(newAction).then(response => {
+    const newProject = req.body;
+    await db.insert(newProject).then(response => {
       res.status(201).json(response);
     });
   } catch (err) {
@@ -39,9 +39,9 @@ router.post("/", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    const action = req.params.id;
-    await db.remove(action);
-    res.status(200).json(action);
+    const project = req.params.id;
+    await db.remove(project);
+    res.status(200).json(project);
   } catch (err) {
     res.status(500).json({ error: err });
   }
@@ -51,9 +51,9 @@ router.put("/:id", async (req, res) => {
   try {
     const changes = req.body;
     const id = req.params.id;
-    const action = await db.update(id, changes);
+    const project = await db.update(id, changes);
     if (id) {
-      res.status(200).json(action);
+      res.status(200).json(project);
     } else {
       res.status(404).json({ message: "the post could not be found" });
     }
