@@ -9,20 +9,22 @@ class Projects extends Component {
     };
   }
   componentDidMount() {
-    axios.get("http://localhost:4000/api/projects/").then(res => {
-      this.setState(() => ({ projects: res.data }));
-      console.log(this.state.projects);
-    });
-    // .catch(error => {
-    //   console.log(error);
-    // });
+    axios
+      .get("http://localhost:4000/api/projects/")
+      .then(res => {
+        this.setState(() => ({ projects: res.data }));
+        console.log(this.state.projects);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
   render() {
     console.log(this.state.projects);
     return (
       <div>
         <h1> Projects here</h1>
-        {this.projects.map(project => (
+        {this.state.projects.map(project => (
           <Project key={project.id} project={project} />
         ))}
       </div>
